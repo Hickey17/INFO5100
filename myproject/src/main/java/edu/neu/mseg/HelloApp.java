@@ -1,6 +1,8 @@
 package edu.neu.mseg;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -11,41 +13,78 @@ public class HelloApp
 {
     public static void main( String[] args )
     {
-        Scanner scanner = new Scanner(System.in);
+        // Part 1 - Array
+        int[] x = {10, 25, 5, 18, 12};
+        int[] y = {15, 8, 30, 14, 20};
 
-        // Step 1: Prompt the user to enter a word
-        System.out.print("Enter any word: ");
-        
-        long startTime = System.currentTimeMillis(); // Record the start time
+        int[] z = new int[5];
 
-        String input = scanner.nextLine().trim(); // Read the user's input and remove leading/trailing spaces
-
-        long endTime = System.currentTimeMillis(); // Record the end time
-
-        long reactionTime = (endTime - startTime) / 1000; // Calculate reaction time in seconds
-
-        // Step 2: Check if the user entered an empty word
-        if (input.isEmpty()) {
-            System.out.println("You did not enter any word.");
-            return; // Exit the program
+        // Populate the z array with the maximum values from x and y
+        for (int i = 0; i < 5; i++) {
+            z[i] = Math.max(x[i], y[i]);
         }
 
-        // Step 3: Classify the word as short, medium, or long
-        String wordClassification;
-        if (input.length() <= 5) {
-            wordClassification = "short";
-        } else if (input.length() <= 10) {
-            wordClassification = "medium";
-        } else {
-            wordClassification = "long";
+        // Display the arrays in a nicely formatted output
+        System.out.print("Array x = {");
+        for (int i = 0; i < x.length; i++) {
+            System.out.print(x[i]);
+            if (i < x.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
+
+        System.out.print("Array y = {");
+        for (int i = 0; i < y.length; i++) {
+            System.out.print(y[i]);
+            if (i < y.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
+
+        System.out.print("Array z = x + y = {");
+        for (int i = 0; i < z.length; i++) {
+            System.out.print(z[i]);
+            if (i < z.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
+
+        // Part 2 - ArrayList
+        List<String> names = new ArrayList<>(Arrays.asList("John", "Alice", "Bob", "Eve", "Charlie"));
+
+        // Switch the first and last letters in each name
+        List<String> switchedNames = new ArrayList<>();
+        for (String name : names) {
+            if (name.length() >= 2) {
+                char firstLetter = name.charAt(0);
+                char lastLetter = name.charAt(name.length() - 1);
+                String switchedName = lastLetter + name.substring(1, name.length() - 1) + firstLetter;
+                switchedNames.add(switchedName);
+            } else {
+                switchedNames.add(name); // Name too short to switch
+            }
         }
 
-        // Step 4: Output the result
-        System.out.println("Your word is " + input);
-        System.out.println("It is a " + wordClassification + " word");
-        System.out.println("The length of the word is " + input.length());
-        System.out.println("Your reaction time is " + reactionTime + " seconds");
+        // Display the switched names in a nicely formatted output
+        System.out.print("Names = {");
+        for (String name : names) {
+            System.out.print(name);
+            if (names.indexOf(name) < names.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
 
-        scanner.close();
+        System.out.print("Names (switched) = {");
+        for (String switchedName : switchedNames) {
+            System.out.print(switchedName);
+            if (switchedNames.indexOf(switchedName) < switchedNames.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
     }
 }
